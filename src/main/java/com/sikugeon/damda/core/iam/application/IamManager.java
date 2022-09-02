@@ -1,6 +1,10 @@
 package com.sikugeon.damda.core.iam.application;
 
+import lombok.val;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.services.iam.IamClient;
@@ -14,6 +18,8 @@ import static com.sikugeon.damda.common.util.JsonUtils.readJsonSimpleDemo;
 
 @Service
 public class IamManager implements IamEditor{
+
+    Logger log = LoggerFactory.getLogger(IamManager.class);
 
     IamClient iamClient;
 
@@ -67,24 +73,19 @@ public class IamManager implements IamEditor{
         }
     }
 
-    public String createIAMRole(String rolename) throws Exception {
-        String fileLocation="";
+    public boolean addUsertoGroup(String username, String groupname){
+        AddUserToGroupRequest request = AddUserToGroupRequest.builder()
+                                        .userName(username)
+                                        .groupName(groupname)
+                                        .build();
 
-        try {
-            JSONObject jsonObject = (JSONObject) readJsonSimpleDemo(fileLocation);
-            CreateRoleRequest request = CreateRoleRequest.builder()
-                    .roleName(rolename)
-                    .assumeRolePolicyDocument(jsonObject.toJSONString())
-                    .description("Created using the AWS SDK for Java")
-                    .build();
+        AddUserToGroupResponse response = iamClient.addUserToGroup(request);
+        int statusCode = response.sdkHttpResponse().statusCode();
 
-            CreateRoleResponse response = iamClient.createRole(request);
-            System.out.println("The ARN of the role is "+response.role().arn());
-
-        } catch (IamException e) {
-            throw e;
+        if(statusCode== HttpStatus.OK.value()) {
+            return true;
         }
-        return "";
-    }
 
+        return false;
+    }
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 @RestController
 public class IamRestController {
     IamEditor iamEditor;
+    final String GROUP_NAME = "damda";
 
     public IamRestController(IamEditor iamEditor){
         this.iamEditor = iamEditor;
@@ -22,7 +23,8 @@ public class IamRestController {
     public ResponseEntity<Map> register(@RequestBody IamRegisterRequest iamRegisterRequest){
         final String username = iamRegisterRequest.getUsername();
         iamEditor.createIAMUser(username);
-        Map map =  iamEditor.createIAMAccessKey(username);
+        Map map = iamEditor.createIAMAccessKey(username);
+        iamEditor.addUsertoGroup(username, GROUP_NAME);
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
     }
 

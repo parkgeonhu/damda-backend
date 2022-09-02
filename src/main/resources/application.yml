@@ -1,1 +1,4 @@
-
+logging:
+  level:
+    com.sikugeon.damda: debug
+    org.springframework.web: debug
