@@ -19,7 +19,7 @@ public class ObjectRestController {
         this.uploader = uploader;
     }
 
-    @PostMapping("/api/object")
+    @PostMapping("/api/objects")
     public ResponseEntity<Map<String, String>> uploadObject(@ModelAttribute UploadRequest uploadRequest) {
 
         List<MultipartFile> multipartFiles = uploadRequest.getImages();

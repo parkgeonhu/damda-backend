@@ -21,9 +21,6 @@ public class AWSConfiguration {
     @Value("${cloud.aws.credentials.secretKey}")
     private String secretKey;
 
-//    @Value("${cloud.aws.region.static}")
-//    private String region;
-
     @Bean
     public IamClient iamClient(){
         Region region = Region.AWS_GLOBAL;
