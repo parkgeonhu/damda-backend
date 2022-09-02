@@ -1,4 +1,4 @@
-package com.sikugeon.damda.core.common;
+package com.sikugeon.damda.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
