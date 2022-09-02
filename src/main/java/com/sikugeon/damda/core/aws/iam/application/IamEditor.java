@@ -1,4 +1,4 @@
-package com.sikugeon.damda.core.iam.application;
+package com.sikugeon.damda.core.aws.iam.application;
 
 import java.util.HashMap;
 import java.util.Map;

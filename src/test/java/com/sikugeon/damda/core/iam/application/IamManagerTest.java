@@ -1,16 +1,10 @@
 package com.sikugeon.damda.core.iam.application;
 
 import com.sikugeon.damda.common.util.RandomUtils;
-import net.bytebuddy.utility.RandomString;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.sikugeon.damda.core.aws.iam.application.IamManager;
 import org.junit.jupiter.api.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.*;
 import java.util.Map;

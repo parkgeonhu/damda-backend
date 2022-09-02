@@ -1,7 +1,5 @@
-package com.sikugeon.damda.core.iam.application;
+package com.sikugeon.damda.core.aws.iam.application;
 
-import lombok.val;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,8 +11,6 @@ import software.amazon.awssdk.services.iam.waiters.IamWaiter;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.sikugeon.damda.common.util.JsonUtils.readJsonSimpleDemo;
 
 @Service
 public class IamManager implements IamEditor{

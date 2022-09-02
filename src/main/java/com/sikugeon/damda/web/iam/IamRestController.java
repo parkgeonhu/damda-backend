@@ -1,6 +1,6 @@
 package com.sikugeon.damda.web.iam;
 
-import com.sikugeon.damda.core.iam.application.IamEditor;
+import com.sikugeon.damda.core.aws.iam.application.IamEditor;
 import com.sikugeon.damda.web.iam.dto.IamRegisterRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
