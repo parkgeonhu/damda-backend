@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class S3Uploader implements Uploader {
     }
 
     @Override
-    public Map<String, String> upload(Map<String, String> userSession, List<MultipartFile> multipartFiles, String dirName) {
+    public Map<String, String> upload(Map<String, String> userSession, List<MultipartFile> multipartFiles, String bucketName, String dirName) {
         // [TO-DO] UserSession 기반으로 accesskey 가져오기
         String accessKeyId = userSession.get("accessKeyId");
         String secretAccessKey = userSession.get("secretAccessKey");
@@ -59,10 +60,10 @@ public class S3Uploader implements Uploader {
         Map<String, String> uploadInfos = new HashMap<>();
         for(MultipartFile multipartFile:multipartFiles){
             File uploadFile = multipartFileToFile(multipartFile);
-            String key = uploadFile.getName();
-            String bucketName = "sikugeon-photoalbum-seoul";
 
+            String key = Path.of(dirName, uploadFile.getName()).toString();
             String url = objectStorage.save(amazonS3Client, uploadFile, bucketName, key);
+
             uploadInfos.put(key, url);
         }
 

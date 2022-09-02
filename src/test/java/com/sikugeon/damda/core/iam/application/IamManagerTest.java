@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.*;
+
 import java.util.Map;
 
 @SpringBootTest(properties = {"spring.config.location=" +
@@ -17,17 +18,17 @@ public class IamManagerTest {
     @Autowired
     IamManager iamManager;
 
-    String username="";
+    String username = "";
     final String GROUP_NAME = "damda";
 
     @BeforeAll
-    public void setUp(){
+    public void setUp() {
         this.username = RandomUtils.randomString();
     }
 
     @Test
     @Order(1)
-    void testRegisterIamUser(){
+    void testRegisterIamUser() {
         iamManager.createIAMUser(username);
         Map map = iamManager.createIAMAccessKey(username);
         boolean result = iamManager.addUsertoGroup(username, GROUP_NAME);

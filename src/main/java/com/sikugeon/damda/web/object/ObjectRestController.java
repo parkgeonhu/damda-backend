@@ -23,7 +23,8 @@ public class ObjectRestController {
     public ResponseEntity<Map<String, String>> uploadObject(@ModelAttribute UploadRequest uploadRequest) {
 
         List<MultipartFile> multipartFiles = uploadRequest.getImages();
-        Map<String, String> uploadInfos = uploader.upload(uploadRequest.getMap(), multipartFiles, "");
+        String bucketName = "sikugeon-photoalbum-seoul";
+        Map<String, String> uploadInfos = uploader.upload(uploadRequest.getMap(), multipartFiles, bucketName, "");
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(uploadInfos);
     }
