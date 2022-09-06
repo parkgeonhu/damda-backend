@@ -69,7 +69,7 @@ public class IamManager implements IamEditor{
         }
     }
 
-    public boolean addUsertoGroup(String username, String groupname){
+    public boolean addUserToGroup(String username, String groupname){
         AddUserToGroupRequest request = AddUserToGroupRequest.builder()
                                         .userName(username)
                                         .groupName(groupname)

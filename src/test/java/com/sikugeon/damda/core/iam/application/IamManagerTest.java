@@ -31,7 +31,7 @@ public class IamManagerTest {
     void testRegisterIamUser() {
         iamManager.createIAMUser(username);
         Map map = iamManager.createIAMAccessKey(username);
-        boolean result = iamManager.addUsertoGroup(username, GROUP_NAME);
+        boolean result = iamManager.addUserToGroup(username, GROUP_NAME);
         assertThat(result).isTrue();
     }
 }

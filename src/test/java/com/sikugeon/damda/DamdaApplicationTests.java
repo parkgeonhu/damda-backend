@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +53,7 @@ class DamdaApplicationTests {
 
         iamManager.createIAMUser(username);
         Map<String, String> userSession = iamManager.createIAMAccessKey(username);
-        boolean result = iamManager.addUsertoGroup(username, GROUP_NAME);
+        boolean result = iamManager.addUserToGroup(username, GROUP_NAME);
         assertThat(result).isTrue();
 
         Thread.sleep(15000);

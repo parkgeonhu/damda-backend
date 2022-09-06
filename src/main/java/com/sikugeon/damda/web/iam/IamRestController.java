@@ -24,7 +24,7 @@ public class IamRestController {
         final String username = iamRegisterRequest.getUsername();
         iamEditor.createIAMUser(username);
         Map map = iamEditor.createIAMAccessKey(username);
-        iamEditor.addUsertoGroup(username, GROUP_NAME);
+        iamEditor.addUserToGroup(username, GROUP_NAME);
         return ResponseEntity.status(HttpStatus.CREATED).body(map);
     }
 
