@@ -32,7 +32,7 @@ public class AuthRestController {
     }
 
     @PostMapping("/api/auth/token/login")
-    public ResponseEntity<Map> verify(@RequestBody OAuthLoginRequest oAuthLoginRequest) {
+    public ResponseEntity<Map> tokenLogin(@RequestBody OAuthLoginRequest oAuthLoginRequest) {
         String id = oAuthService.getId(Provider.valueOf(oAuthLoginRequest.getProvider()), oAuthLoginRequest.getAccessToken());
         if (id == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error","Unauthorized"));
