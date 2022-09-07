@@ -46,12 +46,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // jwt filter
         http.addFilterBefore(
-                new JwtAuthenticationFilter(authenticationManager()),
-                UsernamePasswordAuthenticationFilter.class
-        ).addFilterBefore(
                 new JwtAuthorizationFilter(userRepository),
                 BasicAuthenticationFilter.class
         );
+
         // authorization
         http.authorizeRequests()
                 // /와 /home은 모두에게 허용

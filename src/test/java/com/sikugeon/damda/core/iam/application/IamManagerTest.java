@@ -12,7 +12,7 @@ import java.util.Map;
 
 @SpringBootTest(properties = {"spring.config.location=" +
         "classpath:application.yml" +
-        ",classpath:aws.yml"})
+        ",classpath:secret.yml"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IamManagerTest {
     @Autowired
