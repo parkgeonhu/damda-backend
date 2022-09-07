@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class VerifyRequest {
+public class OAuthLoginRequest {
     String provider;
 
     @JsonProperty("access_token")

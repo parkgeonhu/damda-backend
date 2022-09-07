@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(properties = {"spring.config.location=" +
         "classpath:application.yml" +
-        ",classpath:aws.yml"})
+        ",classpath:secret.yml"})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DamdaApplicationTests {
 
