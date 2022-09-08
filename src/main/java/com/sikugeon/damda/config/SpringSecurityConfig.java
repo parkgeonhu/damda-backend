@@ -3,7 +3,6 @@ package com.sikugeon.damda.config;
 import com.sikugeon.damda.core.user.application.UserService;
 import com.sikugeon.damda.core.user.domain.User;
 import com.sikugeon.damda.core.user.infrastructure.UserRepository;
-import com.sikugeon.damda.jwt.JwtAuthenticationFilter;
 import com.sikugeon.damda.jwt.JwtAuthorizationFilter;
 import com.sikugeon.damda.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;

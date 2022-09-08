@@ -25,6 +25,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String authority;
+    private String bucketName;
+    private String accessKeyId;
+    private String secretAccessKey;
 
     public User(
             String username,
@@ -43,6 +46,15 @@ public class User implements UserDetails {
 
     public Boolean isAdmin() {
         return authority.equals("ROLE_ADMIN");
+    }
+
+    public void updateAWSKey(String accessKeyId, String secretAccessKey){
+        this.accessKeyId = accessKeyId;
+        this.secretAccessKey = secretAccessKey;
+    }
+
+    public void updateBucketName(String bucketName){
+        this.bucketName = bucketName;
     }
 
     @Override
