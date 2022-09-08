@@ -1,7 +1,9 @@
 package com.sikugeon.damda.core.aws.s3.application;
 
-public interface S3Editor {
-    void createBucket(String accessKey, String secretKey, String bucketName);
+import java.util.Map;
 
-    void addPolicyToBucket(String accessKey, String secretKey, String bucketName);
+public interface S3Editor {
+    void createBucket(Map<String, String> awsKey, String bucketName);
+
+    void addPolicyToBucket(Map<String, String> awsKey, String bucketName);
 }

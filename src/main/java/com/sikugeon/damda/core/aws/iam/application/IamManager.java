@@ -51,7 +51,7 @@ public class IamManager implements IamEditor{
     }
 
     @Override
-    public Map createIAMAccessKey(String username) {
+    public Map<String, String> createIAMAccessKey(String username) {
         Map<String, String> map= new HashMap<>();
 
         try {

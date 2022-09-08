@@ -16,12 +16,4 @@ public class UploadRequest {
     String accessKeyId;
     String secretAccessKey;
     List<MultipartFile> images;
-
-    public Map<String, String> getMap(){
-        Map<String, String> map=new HashMap<>();
-        map.put("accessKeyId", accessKeyId);
-        map.put("secretAccessKey", secretAccessKey);
-
-        return map;
-    }
 }
