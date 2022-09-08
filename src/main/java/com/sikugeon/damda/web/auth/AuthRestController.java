@@ -53,7 +53,7 @@ public class AuthRestController {
         body.put("id", id);
         body.put(JwtProperties.COOKIE_NAME, jwtToken);
 
-        //쿠기 생성
+        //쿠키 생성
         Cookie cookie = new Cookie(JwtProperties.COOKIE_NAME, jwtToken);
         cookie.setMaxAge(JwtProperties.EXPIRATION_TIME); // 쿠키의 만료시간 설정
         cookie.setPath("/");

@@ -20,12 +20,9 @@ import java.util.Map;
 public class ObjectRestController {
 
     Uploader uploader;
-    S3Manager s3Manager;
 
-    public ObjectRestController(Uploader uploader,
-                                S3Manager s3Manager) {
+    public ObjectRestController(Uploader uploader) {
         this.uploader = uploader;
-
     }
 
     @PostMapping("/api/objects")
