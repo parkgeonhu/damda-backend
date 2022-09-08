@@ -52,7 +52,7 @@ class DamdaApplicationTests {
         final String GROUP_NAME = "damda";
 
         iamManager.createIAMUser(username);
-        Map<String, String> userSession = iamManager.createIAMAccessKey(username);
+        Map<String, String> awsKey = iamManager.createIAMAccessKey(username);
         boolean result = iamManager.addUserToGroup(username, GROUP_NAME);
         assertThat(result).isTrue();
 
@@ -60,12 +60,10 @@ class DamdaApplicationTests {
 
         String bucketName = RandomUtils.randomString();
 
-        String accessKeyId = userSession.get("accessKeyId");
-        String secretAccessKey = userSession.get("secretAccessKey");
-        s3Manager.createBucket(accessKeyId, secretAccessKey, bucketName);
-        s3Manager.addPolicyToBucket(accessKeyId, secretAccessKey, bucketName);
+        s3Manager.createBucket(awsKey, bucketName);
+        s3Manager.addPolicyToBucket(awsKey, bucketName);
 
-        log.debug(String.valueOf(s3Uploader.upload(userSession, multipartFiles, bucketName, "app")));
+        log.debug(String.valueOf(s3Uploader.upload(awsKey, multipartFiles, bucketName, "app")));
     }
 
 }

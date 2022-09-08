@@ -2,6 +2,7 @@ package com.sikugeon.damda.core.user.application;
 
 import com.sikugeon.damda.common.util.RandomUtils;
 import com.sikugeon.damda.core.aws.iam.application.IamEditor;
+import com.sikugeon.damda.core.aws.s3.application.S3Manager;
 import com.sikugeon.damda.core.user.domain.User;
 import com.sikugeon.damda.core.user.exception.AlreadyRegisteredUserException;
 import com.sikugeon.damda.core.user.infrastructure.UserRepository;
@@ -18,6 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final IamEditor iamEditor;
+    private final S3Manager s3Manager;
 
     /**
      * 유저 등록
@@ -35,11 +37,22 @@ public class UserService {
         }
         User user = new User(username, passwordEncoder.encode(password), "ROLE_USER");
         user.updateBucketName(RandomUtils.randomString());
-        iamEditor.createIAMUser(username);
-        Map map = iamEditor.createIAMAccessKey(username);
-        iamEditor.addUserToGroup(username, "damda");
 
-        user.updateAWSKey((String) map.get("accessKeyId"), (String) map.get("accessKeyId"));
+        //IAM 설정
+        iamEditor.createIAMUser(username);
+        Map<String, String> awsKey = iamEditor.createIAMAccessKey(username);
+        iamEditor.addUserToGroup(username, "damda");
+        try {
+            Thread.sleep(10000);
+        } catch (Exception e) {
+
+        }
+
+        //S3 설정
+        s3Manager.createBucket(awsKey, user.getBucketName());
+        s3Manager.addPolicyToBucket(awsKey, user.getBucketName());
+
+        user.updateAWSKey(awsKey);
         return userRepository.save(user);
     }
 

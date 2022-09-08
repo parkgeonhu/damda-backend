@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
@@ -48,13 +50,21 @@ public class User implements UserDetails {
         return authority.equals("ROLE_ADMIN");
     }
 
-    public void updateAWSKey(String accessKeyId, String secretAccessKey){
-        this.accessKeyId = accessKeyId;
-        this.secretAccessKey = secretAccessKey;
+    public void updateAWSKey(Map<String, String> awsKey){
+        this.accessKeyId = awsKey.get("accessKeyId");
+        this.secretAccessKey = awsKey.get("secretAccessKey");
     }
 
     public void updateBucketName(String bucketName){
         this.bucketName = bucketName;
+    }
+
+    public Map<String, String> getAwsKey(){
+        Map<String, String> awsKey = new HashMap<>();
+        awsKey.put("accessKeyId", accessKeyId);
+        awsKey.put("secretAccessKey", secretAccessKey);
+
+        return awsKey;
     }
 
     @Override

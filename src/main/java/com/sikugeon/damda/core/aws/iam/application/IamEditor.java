@@ -5,7 +5,7 @@ import java.util.Map;
 public interface IamEditor {
 
     String createIAMUser(String username);
-    Map createIAMAccessKey(String username);
+    Map<String, String> createIAMAccessKey(String username);
     boolean addUserToGroup(String username, String groupname);
 
 }

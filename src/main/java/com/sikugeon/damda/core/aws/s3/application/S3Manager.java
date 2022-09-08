@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.regions.Region;
 
+import java.util.Map;
+
 @Service
 public class S3Manager implements S3Editor {
 
@@ -29,7 +31,9 @@ public class S3Manager implements S3Editor {
     }
 
     @Override
-    public void createBucket(String accessKey, String secretKey, String bucketName) {
+    public void createBucket(Map<String, String> awsKey, String bucketName) {
+        String accessKey = awsKey.get("accessKeyId");
+        String secretKey = awsKey.get("secretAccessKey");
         AmazonS3Client amazonS3Client = S3Client(accessKey, secretKey);
         try {
             if (!amazonS3Client.doesBucketExistV2(bucketName)) {
@@ -54,7 +58,9 @@ public class S3Manager implements S3Editor {
     }
 
     @Override
-    public void addPolicyToBucket(String accessKey, String secretKey, String bucketName) {
+    public void addPolicyToBucket(Map<String, String> awsKey, String bucketName) {
+        String accessKey = awsKey.get("accessKeyId");
+        String secretKey = awsKey.get("secretAccessKey");
         AmazonS3Client amazonS3Client = S3Client(accessKey, secretKey);
 
         String policyText=String.format("{\n" +
