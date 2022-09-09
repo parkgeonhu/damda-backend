@@ -1,8 +1,9 @@
 package com.sikugeon.damda.config;
 
-import org.springframework.context.MessageSource;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -35,5 +36,10 @@ public class MyWebMvcConfiguration implements WebMvcConfigurer {
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
+    }
+
+    @Bean
+    public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+        return new Jackson2ObjectMapperBuilder().propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
     }
 }

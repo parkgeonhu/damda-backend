@@ -1,9 +1,11 @@
 package com.sikugeon.damda.web.object;
 
+import com.sikugeon.damda.core.aws.s3.application.S3Finder;
 import com.sikugeon.damda.core.aws.s3.application.S3Manager;
 import com.sikugeon.damda.core.object.domain.Uploader;
 import com.sikugeon.damda.core.user.domain.User;
 import com.sikugeon.damda.web.object.dto.UploadRequest;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +22,23 @@ import java.util.Map;
 public class ObjectRestController {
 
     Uploader uploader;
+    S3Finder s3Finder;
 
-    public ObjectRestController(Uploader uploader) {
+
+    public ObjectRestController(Uploader uploader, S3Finder s3Finder) {
         this.uploader = uploader;
+        this.s3Finder = s3Finder;
+    }
+
+    @GetMapping("/api/objects")
+    public ResponseEntity<List> listObjects(@RequestParam String prefix, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        List result = s3Finder.getObjects(user.getAwsKey(), user.getBucketName(), prefix);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PostMapping("/api/objects")
-    public ResponseEntity<Map<String, String>> uploadObject(@ModelAttribute UploadRequest uploadRequest, Authentication authentication) {
+    public ResponseEntity<Map<String, String>> uploadObjects(@ModelAttribute UploadRequest uploadRequest, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         List<MultipartFile> multipartFiles = uploadRequest.getImages();
         String bucketName = user.getBucketName();

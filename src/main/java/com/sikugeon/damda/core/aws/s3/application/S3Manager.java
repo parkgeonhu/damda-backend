@@ -8,17 +8,19 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.GetBucketLocationRequest;
+import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.regions.Region;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
-public class S3Manager implements S3Editor {
-
-    Logger log = LoggerFactory.getLogger(S3Manager.class);
+@Slf4j
+public class S3Manager implements S3Editor, S3Finder {
 
     public AmazonS3Client S3Client(String accessKey, String secretKey){
         log.debug(accessKey+" : "+secretKey);
@@ -84,5 +86,15 @@ public class S3Manager implements S3Editor {
         }catch(Exception e){
             throw e;
         }
+    }
+
+
+    public List getObjects(Map<String, String> awsKey, String bucketName, String prefix) {
+        String accessKey = awsKey.get("accessKeyId");
+        String secretKey = awsKey.get("secretAccessKey");
+        AmazonS3Client amazonS3Client = S3Client(accessKey, secretKey);
+        ListObjectsV2Result result = amazonS3Client.listObjectsV2(bucketName, prefix);
+
+        return result.getObjectSummaries();
     }
 }
