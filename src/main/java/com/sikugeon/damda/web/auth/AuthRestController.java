@@ -23,7 +23,6 @@ public class AuthRestController {
 
     OAuthService oAuthService;
     UserService userService;
-    IamEditor iamEditor;
 
     @Value("${secretKey}")
     private String SECRET_KEY;
