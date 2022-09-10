@@ -4,7 +4,8 @@ logging:
     org.springframework.web: debug
     org.springframework.test: debug
 
-
+spring.servlet.multipart.maxFileSize: 50MB
+spring.servlet.multipart.maxRequestSize: 50MB
 
 server:
   error:
