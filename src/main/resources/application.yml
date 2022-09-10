@@ -3,3 +3,10 @@ logging:
     com.sikugeon.damda: debug
     org.springframework.web: debug
     org.springframework.test: debug
+
+
+
+server:
+  error:
+    include-message: always
+  port: 5000

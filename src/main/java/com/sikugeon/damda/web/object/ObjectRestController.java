@@ -1,19 +1,17 @@
 package com.sikugeon.damda.web.object;
 
 import com.sikugeon.damda.core.aws.s3.application.S3Finder;
-import com.sikugeon.damda.core.aws.s3.application.S3Manager;
 import com.sikugeon.damda.core.object.domain.Uploader;
 import com.sikugeon.damda.core.user.domain.User;
 import com.sikugeon.damda.web.object.dto.UploadRequest;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +21,6 @@ public class ObjectRestController {
 
     Uploader uploader;
     S3Finder s3Finder;
-
 
     public ObjectRestController(Uploader uploader, S3Finder s3Finder) {
         this.uploader = uploader;

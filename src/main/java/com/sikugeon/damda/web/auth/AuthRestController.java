@@ -48,7 +48,7 @@ public class AuthRestController {
 
         String jwtToken = JwtUtils.createToken(user);
 
-        Map<String, String> body = new HashMap();
+        Map<String, String> body = new HashMap<>();
         body.put("id", id);
         body.put(JwtProperties.COOKIE_NAME, jwtToken);
 
