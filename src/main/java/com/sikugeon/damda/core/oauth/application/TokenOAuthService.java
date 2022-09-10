@@ -1,5 +1,6 @@
 package com.sikugeon.damda.core.oauth.application;
 
+import com.sikugeon.damda.common.util.RandomUtils;
 import com.sikugeon.damda.core.oauth.domain.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,10 @@ public class TokenOAuthService implements OAuthService {
             case GOOGLE:
                 userInfo = googleOAuthUserInfoService.getUserInfo(token);
                 id = userInfo.getId();
+                break;
+            case TEST:
+                id = RandomUtils.randomString();
+                break;
         }
         return id;
     }

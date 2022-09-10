@@ -1,7 +1,7 @@
 package com.sikugeon.damda.core.oauth.application;
 
 public enum Provider {
-    GOOGLE("google");
+    GOOGLE("google"), TEST("TEST");
 
     String name;
 

@@ -43,7 +43,7 @@ public class UserService {
         Map<String, String> awsKey = iamEditor.createIAMAccessKey(username);
         iamEditor.addUserToGroup(username, "damda");
         try {
-            Thread.sleep(10000);
+            Thread.sleep(15000);
         } catch (Exception e) {
 
         }
